@@ -29,7 +29,4 @@ enum Contacts {
     Table,
     Id,
     Email,
-    
 }
-
-

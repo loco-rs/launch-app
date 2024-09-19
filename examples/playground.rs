@@ -1,6 +1,6 @@
+use launch_app::app::App;
 #[allow(unused_imports)]
 use loco_rs::{cli::playground, prelude::*};
-use launch_app::app::App;
 
 #[tokio::main]
 async fn main() -> loco_rs::Result<()> {

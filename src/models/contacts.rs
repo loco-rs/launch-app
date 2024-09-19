@@ -7,6 +7,10 @@ impl ActiveModelBehavior for ActiveModel {
 }
 
 impl Model {
+    /// Check if contact user exists by email
+    ///
+    /// # Errors
+    /// When could has query/connectivity error
     pub async fn exists(db: &DatabaseConnection, email: &str) -> ModelResult<bool> {
         let count = contacts::Entity::find()
             .filter(

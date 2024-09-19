@@ -1,0 +1,4 @@
+[alias]
+loco = "run --bin launch_app-cli --"
+loco-tool = "run --bin tool --"
+playground = "run --example playground"

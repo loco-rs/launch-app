@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}
+Prepare to take a ride | Hyperdrive Locomotive Corp
+{% endblock title %}
+
+{% block content %}
+<div class="prose mx-auto mt-[10rem]">
+    <h1 class="text-center text-5xl">🚂</h1>
+    <h2 class="mt-10 mb-0 text-center text-5xl font-bold leading-9 tracking-tight text-gray-900">Prepare to take a wild
+        ride</h2>
+    <h3 class="mt-10 text-center text-2xl font-normal leading-9 tracking-tight text-gray-900">
+        Sign up for the first ride in our <em>hyperdrive</em> locomotive!
+    </h3>
+
+    <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+        <form class="space-y-6" hx-post="/contacts" hx-ext="submitjson">
+            <div>
+                <div class="mt-2">
+                    <input id="email" name="email" type="email" autocomplete="email" required
+                        class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                </div>
+            </div>
+
+            <div>
+                <button type="submit"
+                    class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save
+                    a seat!</button>
+                <p class="text-center text-xs text-gray-500">
+                    By signing up you agree to our
+                    <a href="/pages/terms" class="font-semibold leading-6 text-zinc-600 hover:text-zinc-500">terms of
+                        service</a>
+                </p>
+            </div>
+        </form>
+
+        <div class="mt-20 text-sm text-center">
+            <a href="/pages/about">About</a> |
+            <a href="/pages/terms">Terms of Service</a>
+
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block js %}
+<script>
+    htmx.defineExtension('submitjson', {
+        onEvent: function (name, evt) {
+            if (name === "htmx:configRequest") {
+                evt.detail.headers['Content-Type'] = "application/json"
+            }
+        },
+        encodeParameters: function (xhr, parameters, elt) {
+            const json = {};
+            for (const [key, value] of Object.entries(parameters)) {
+                const inputType = elt.querySelector(`[name=${key}]`).type;
+                if (inputType === 'number') {
+                    json[key] = parseFloat(value);
+                } else if (inputType === 'checkbox') {
+                    json[key] = elt.querySelector(`[name=${key}]`).checked;
+                } else {
+                    json[key] = value;
+                }
+            }
+            return JSON.stringify(json);
+        }
+    })
+</script>
+{% endblock js %}

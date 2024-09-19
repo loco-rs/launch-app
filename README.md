@@ -1,4 +1,4 @@
-# 🚀 Loco Launch App: 
+# 🚀 Loco Launch App
 
 This project demonstrates how to build a launch app from scratch using [Loco](https://loco.rs) and Rust, guiding you through every step of the development process—from initial setup to deploying the app in production.
 
